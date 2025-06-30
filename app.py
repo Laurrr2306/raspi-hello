@@ -5,7 +5,7 @@ class HelloHandler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header('Content-type', 'text/plain')
         self.end_headers()
-        self.wfile.write(b"MILSUGI!Jegosu")
+        self.wfile.write(b"MILSUGI!Jegosu222")
 
 def run(server_class=HTTPServer, handler_class=HelloHandler):
     server_address = ('', 8000)
