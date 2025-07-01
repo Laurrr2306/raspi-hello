@@ -28,7 +28,7 @@ jobs:
           host: uk1.pitunnel.net
           port: 58487
           username: ${{ secrets.PI_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          key: ${{ secrets.PI_SSH_KEY }}
           script: |
             cd ~/raspi-hello
             git pull origin main
