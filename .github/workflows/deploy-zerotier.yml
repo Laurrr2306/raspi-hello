@@ -22,6 +22,8 @@ jobs:
         key: ${{ secrets.PI_SSH_KEY }}
         script: |
           cd ~/raspi-hello
+          git reset --hard HEAD
+          git clean -fd
           git pull origin main
           pkill -f app.py || true
           nohup python3 app.py > app.log 2>&1 &
