@@ -1,4 +1,4 @@
-name: Deploy to Raspberry Pi via PiTunnel SSH
+name: Deploy to Raspberry Pi via PiTunnel
 
 on:
   push:
@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Deploy to Raspberry Pi using PiTunnel
+    - name: Deploy to Raspberry Pi
       uses: appleboy/ssh-action@v0.1.7
       with:
         host: uk1.pitunnel.net
