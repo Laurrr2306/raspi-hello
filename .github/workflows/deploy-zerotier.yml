@@ -20,9 +20,9 @@ jobs:
         port: 58487
         username: ${{ secrets.PI_USER }}
         key: ${{ secrets.PI_SSH_KEY }}
-         script: |
-           cd ~/raspi-hello
-           git reset --hard HEAD
-           git clean -fd
-           git pull origin main
-           sudo systemctl restart raspi-hello.service
+        script: |         
+          cd ~/raspi-hello
+          git reset --hard HEAD
+          git clean -fd
+          git pull origin main
+          sudo systemctl restart raspi-hello.service
