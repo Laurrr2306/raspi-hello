@@ -1,4 +1,4 @@
-name: Deploy to Raspberry Pi over ZeroTier SSH
+name: Deploy to Raspberry Pi via PiTunnel SSH
 
 on:
   push:
@@ -10,36 +10,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repo
+    - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Install ZeroTier One
-      run: |
-        curl -s https://install.zerotier.com | sudo bash
-
-    - name: Join ZeroTier network
-      run: |
-        sudo zerotier-cli join ${{ secrets.ZEROTIER_NETWORK_ID }}
-
-    - name: Wait for ZeroTier to connect
-      run: |
-        for i in {1..10}; do
-          status=$(sudo zerotier-cli info)
-          if [[ "$status" == *"OK"* ]]; then
-            echo "Joined ZeroTier network"
-            break
-          fi
-          echo "Waiting for ZeroTier authorization..."
-          sleep 10
-        done
-
-    - name: Run deployment script on Raspberry Pi
+    - name: Deploy to Raspberry Pi using PiTunnel
       uses: appleboy/ssh-action@v0.1.7
       with:
-        host: ${{ secrets.PI_ZEROTIER_IP }}       # Pi ZeroTier IP stored as a secret
-        username: ${{ secrets.PI_USER }}                             # or your Pi username
-        key: ${{ secrets.SSH_PRIVATE_KEY }}      # SSH private key stored as secret
+        host: uk1.pitunnel.net
+        port: 58487
+        username: ${{ secrets.PI_USER }}
+        key: ${{ secrets.PI_SSH_KEY }}
         script: |
           cd ~/raspi-hello
           git pull origin main
-          # add other commands you want to run on the Pi
+          pkill -f app.py || true
+          nohup python3 app.py > app.log 2>&1 &

@@ -22,15 +22,15 @@ jobs:
     needs: test
     if: success()
     steps:
-      - name: Deploy to Raspberry Pi
-        uses: appleboy/ssh-action@v0.1.6
+      - name: Deploy to Raspberry Pi via PiTunnel
+        uses: appleboy/ssh-action@v0.1.7
         with:
-          host: ${{ secrets.PI_HOST }}
+          host: uk1.pitunnel.net
+          port: 58487
           username: ${{ secrets.PI_USER }}
-          key: ${{ secrets.PI_SSH_KEY }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd ~/raspi-hello
             git pull origin main
             pkill -f app.py || true
             nohup python3 app.py > app.log 2>&1 &
-            ~/raspi-hello/deploy.sh
