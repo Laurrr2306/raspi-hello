@@ -17,7 +17,7 @@ jobs:
       uses: appleboy/ssh-action@v0.1.7
       with:
         host: uk1.pitunnel.net
-        port: 58487
+        port: 41765
         username: ${{ secrets.PI_USER }}
         key: ${{ secrets.PI_SSH_KEY }}
         script: |         
