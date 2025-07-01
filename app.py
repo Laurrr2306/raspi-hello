@@ -6,7 +6,7 @@ class HelloHandler(BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header('Content-type', 'text/plain')
             self.end_headers()
-            self.wfile.write(b"112MILSUGI!radulke222")
+            self.wfile.write(b"ia-l de jos :X 2")
         except Exception as e:
             print(f"Error handling GET request: {e}")
 
