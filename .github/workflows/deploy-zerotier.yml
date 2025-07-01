@@ -26,4 +26,7 @@ jobs:
           git clean -fd
           git pull origin main
           pkill -f app.py || true
-          nohup python3 app.py > app.log 2>&1 &
+          setsid python3 app.py > app.log 2>&1 < /dev/null &
+          sleep 2
+          ps aux | grep app.py
+          netstat -tulnp | grep 8000 || true
